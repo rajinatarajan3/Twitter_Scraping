@@ -31,7 +31,7 @@ if st.button('Search Tweets'):
                 'source':tweet.source,
                 'likeCount': tweet.likeCount
                 }       
-    df=pd.DataFrame(tweets,columns=["Date","Id","Url","Tweet_content","User","Reply_count","s","Language","Source","Like_count"])
+    df=pd.DataFrame(tweets,columns=["Date","Id","Url","Tweet_content","User","Reply_count","Retweet_count","Language","Source","Like_count"])
 
     st.write(df)
     csv = df.to_csv(index=False)
