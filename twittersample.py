@@ -5,16 +5,12 @@ import pandas as pd
 import pymongo
 import base64
 
-
 keyword = st.text_input('Enter a twitter search query')
 since_date = str(st.date_input("Select the since date"))
 until_date =str(st.date_input("until_date"))
 limits= st.number_input("Enter the tweet limit",min_value=1.0,max_value=1000.0)
-
 tweets=[]
-
 query= keyword +" since:"+since_date+ " until:"+until_date
-
 if st.button('Search Tweets'):
     st.write(f'Tweets matching "{query}')
     
@@ -34,10 +30,7 @@ if st.button('Search Tweets'):
                 'language':tweet.lang,
                 'source':tweet.source,
                 'likeCount': tweet.likeCount
-                   
-                }
-                        
-            
+                }       
     df=pd.DataFrame(tweets,columns=["Date","Id","Url","Tweet_content","User","Reply_count","s","Language","Source","Like_count"])
 
     st.write(df)
@@ -53,8 +46,6 @@ if st.button('Search Tweets'):
     
     if st.button("Database"):
         client=pymongo.MongoClient("mongodb://localhost:27017/")
-
-    
         mydb=client["project1"]
         collection=mydb["collection"]
         collection.insert_one(tweet_data)    
